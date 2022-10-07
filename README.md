@@ -25,8 +25,11 @@ Mac  | ✅
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the package to pubspec.yaml
+
+``` yaml
+    network_requests: // use the latest version
+```
 
 ## Platform specific configuration
 
