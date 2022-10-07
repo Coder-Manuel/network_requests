@@ -71,3 +71,8 @@ message  | The status code message received from the api call | `String`
 success  | The success status of api call, will be true if the request is successful and false if vice-versa | `bool`
 data  | The data received from the api call | `Object`
 exception  | The error received from the api call | `Object`
+
+## Issues and Feature Requests
+
+If you notice any bug or want to request for a feature, please fill free to raise an issue at:
+[Issues/Feature](https://github.com/Coder-Manuel/network_requests/issues)
