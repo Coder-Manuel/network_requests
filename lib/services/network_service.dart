@@ -129,7 +129,7 @@ class NetworkRequest {
           .post(
             url,
             headers: headers,
-            body: body,
+            body: bodyParser(body),
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
@@ -188,7 +188,7 @@ class NetworkRequest {
           .put(
             url,
             headers: headers,
-            body: body,
+            body: bodyParser(body),
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
@@ -246,7 +246,7 @@ class NetworkRequest {
           .delete(
             url,
             headers: headers,
-            body: body,
+            body: bodyParser(body),
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),

@@ -84,3 +84,11 @@ Future<ApiResponse> uploadRespData(http.StreamedResponse request) async {
 
   return _response;
 }
+
+String bodyParser(Object? body) {
+  if (body is String) {
+    return body;
+  } else {
+    return json.encode(body);
+  }
+}
