@@ -86,9 +86,14 @@ Future<ApiResponse> uploadRespData(http.StreamedResponse request) async {
 }
 
 String bodyParser(Object? body) {
+  late String value;
   if (body is String) {
-    return body;
+    value = body;
   } else {
-    return json.encode(body);
+    value = json.encode(body);
   }
+
+  Logger.log('====== BODy: $value');
+
+  return value;
 }
