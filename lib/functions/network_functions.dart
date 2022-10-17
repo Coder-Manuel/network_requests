@@ -93,7 +93,5 @@ String bodyParser(Object? body) {
     value = json.encode(body);
   }
 
-  Logger.log('====== BODy: $value');
-
   return value;
 }

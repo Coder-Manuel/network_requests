@@ -7,7 +7,6 @@ import 'dart:convert';
 
 /// 3rd party libraries
 import 'package:http/http.dart' as http;
-import 'package:network_requests/utils/logger_util.dart';
 export 'package:network_requests/services/network_service.dart';
 export 'package:network_requests/interceptors/network_request_interceptor.dart';
 export 'package:http_interceptor/models/request_data.dart';
