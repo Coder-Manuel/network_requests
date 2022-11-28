@@ -90,7 +90,7 @@ String bodyParser(Object? body) {
   if (body is String) {
     value = body;
   } else {
-    value = json.encode(body);
+    value = json.encode(body ?? {});
   }
 
   return value;

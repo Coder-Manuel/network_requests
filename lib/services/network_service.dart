@@ -65,7 +65,7 @@ class NetworkRequest {
     Map<String, String>? headers,
     Duration? timeout,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _httpClient
           .get(
@@ -80,22 +80,22 @@ class NetworkRequest {
           );
 
       // * Set the response
-      _apiResponse = respData(response.statusCode, response.body);
+      apiResponse = respData(response.statusCode, response.body);
     } on TimeoutException {
-      _apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      _apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
+      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
     } on SocketException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } on http.ClientException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      _apiResponse.exception = e;
-      _apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      apiResponse.exception = e;
+      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
 
-    return _apiResponse;
+    return apiResponse;
   }
 
   /// Sends a POST request with the given headers and body to the given URL.
@@ -123,7 +123,7 @@ class NetworkRequest {
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _httpClient
           .post(
@@ -139,22 +139,22 @@ class NetworkRequest {
           );
 
       // * Set the response
-      _apiResponse = respData(response.statusCode, response.body);
+      apiResponse = respData(response.statusCode, response.body);
     } on TimeoutException {
-      _apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      _apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
+      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
     } on SocketException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } on http.ClientException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      _apiResponse.exception = e;
-      _apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      apiResponse.exception = e;
+      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
 
-    return _apiResponse;
+    return apiResponse;
   }
 
   /// Sends a PUT request with the given headers and body to the given URL.
@@ -182,7 +182,7 @@ class NetworkRequest {
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _httpClient
           .put(
@@ -198,22 +198,22 @@ class NetworkRequest {
           );
 
       // * Set the response
-      _apiResponse = respData(response.statusCode, response.body);
+      apiResponse = respData(response.statusCode, response.body);
     } on TimeoutException {
-      _apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      _apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
+      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
     } on SocketException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } on http.ClientException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      _apiResponse.exception = e;
-      _apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      apiResponse.exception = e;
+      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
 
-    return _apiResponse;
+    return apiResponse;
   }
 
   /// Sends a DELETE request with the given headers to the given URL.
@@ -240,7 +240,7 @@ class NetworkRequest {
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse apiResponse = ApiResponse();
     try {
       final response = await _httpClient
           .delete(
@@ -256,22 +256,22 @@ class NetworkRequest {
           );
 
       // * Set the response
-      _apiResponse = respData(response.statusCode, response.body);
+      apiResponse = respData(response.statusCode, response.body);
     } on TimeoutException {
-      _apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      _apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
+      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
     } on SocketException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } on http.ClientException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      _apiResponse.exception = e;
-      _apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      apiResponse.exception = e;
+      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
 
-    return _apiResponse;
+    return apiResponse;
   }
 
   /// Sends a [MultipartRequest] to upload [files] with the given [headers] to the provided [url].
@@ -322,7 +322,7 @@ class NetworkRequest {
       request.fields.addAll(otherFields);
     }
 
-    ApiResponse _apiResponse = ApiResponse();
+    ApiResponse apiResponse = ApiResponse();
     try {
       final response = await request.send().timeout(
             timeout ?? const Duration(seconds: 30),
@@ -332,21 +332,21 @@ class NetworkRequest {
           );
 
       // * Set the response
-      _apiResponse = await uploadRespData(response);
+      apiResponse = await uploadRespData(response);
     } on TimeoutException {
-      _apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      _apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
+      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
     } on SocketException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } on http.ClientException {
-      _apiResponse.exception = ResponseMessage.NO_INTERNET;
-      _apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.exception = ResponseMessage.NO_INTERNET;
+      apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      _apiResponse.exception = e;
-      _apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      apiResponse.exception = e;
+      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
 
-    return _apiResponse;
+    return apiResponse;
   }
 }
