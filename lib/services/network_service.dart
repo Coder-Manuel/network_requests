@@ -36,6 +36,11 @@ class NetworkRequest {
     Logger.log('Client has been initialized');
   }
 
+  /// Add a retry interceptor to the client.
+  void addRetryPolicy(RetryInterceptor retryInterceptor) {
+    _httpClient.retryPolicy = retryInterceptor;
+  }
+
   /// Set whether the default logger should be activated.
   ///
   /// When activated, it will log the request endpoint and response status code.
