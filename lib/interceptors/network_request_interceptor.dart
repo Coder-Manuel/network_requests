@@ -23,4 +23,9 @@ import 'package:http_interceptor/http_interceptor.dart';
 ///
 /// }
 /// ```
-abstract class NetworkRequsetInterceptor extends InterceptorContract {}
+abstract class NetworkRequestInterceptor extends InterceptorContract {}
+
+/// A retry interceptor that can be used to retry a request.
+///
+/// A good use-case could be when a token is expired.
+abstract class RetryInterceptor extends RetryPolicy {}

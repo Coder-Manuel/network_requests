@@ -15,8 +15,9 @@ part of network_requests;
 /// >`message` [string] - The message of the status code returned
 ///
 class ApiResponse {
-  var _data;
-  var _apiError;
+  dynamic _data;
+  dynamic _apiError;
+
   // Using Service not Available status code as default
   int _status = 503;
   String _message = '';

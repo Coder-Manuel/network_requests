@@ -27,16 +27,33 @@ class NetworkRequest {
   }
 
   void _initializer() {
-    Logger.log('Client has been initialized');
     _httpClient = InterceptedHttp.build(
       interceptors: [
         LoggingInterceptor(),
       ],
     );
+
+    Logger.log('Client has been initialized');
+  }
+
+  /// Set whether the default logger should be activated.
+  ///
+  /// When activated, it will log the request endpoint and response status code.
+  void setLoggerActive(bool activate) {
+    bool loggerActive = _httpClient.interceptors.contains(LoggingInterceptor());
+    if (activate) {
+      if (!loggerActive) {
+        _httpClient.interceptors.insert(0, LoggingInterceptor());
+      }
+    } else {
+      if (loggerActive) {
+        _httpClient.interceptors.remove(LoggingInterceptor());
+      }
+    }
   }
 
   /// Add an interceptor to the [NetworkRequest] client.
-  void addInterceptor(NetworkRequsetInterceptor value) {
+  void addInterceptor(NetworkRequestInterceptor value) {
     if (_httpClient.interceptors.contains(value)) {
       _httpClient.interceptors.remove(value);
     }
