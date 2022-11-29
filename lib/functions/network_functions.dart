@@ -6,67 +6,67 @@ part of network_requests;
 ///
 /// > * _@param: (required)_ __[String]__ body
 ApiResponse respData(int status, String rawBody) {
-  ApiResponse _response = ApiResponse();
+  ApiResponse response = ApiResponse();
 
   final body = rawBody.isNotEmpty ? json.decode(rawBody) : {};
 
   switch (status) {
     case 200:
-      _response.status = status;
-      _response.data = body;
-      _response.message = ResponseMessage.OKAY.value;
-      _response.success = true;
+      response.status = status;
+      response.data = body;
+      response.message = ResponseMessage.OKAY.value;
+      response.success = true;
       break;
     case 201:
-      _response.status = status;
-      _response.data = body;
-      _response.message = ResponseMessage.CREATED.value;
-      _response.success = true;
+      response.status = status;
+      response.data = body;
+      response.message = ResponseMessage.CREATED.value;
+      response.success = true;
       break;
     case 400:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.BAD_REQUEST.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.BAD_REQUEST.value;
+      response.success = false;
       break;
     case 401:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.UNAUTHORIZED.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.UNAUTHORIZED.value;
+      response.success = false;
       break;
     case 403:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.FORBIDDEN.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.FORBIDDEN.value;
+      response.success = false;
       break;
     case 404:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.NOT_FOUND.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.NOT_FOUND.value;
+      response.success = false;
       break;
     case 405:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.METHOD_NOT_ALLOWED.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.METHOD_NOT_ALLOWED.value;
+      response.success = false;
       break;
     case 500:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.INTERNAL_SERVER_ERROR.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.INTERNAL_SERVER_ERROR.value;
+      response.success = false;
       break;
     default:
-      _response.status = status;
-      _response.exception = body;
-      _response.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
-      _response.success = false;
+      response.status = status;
+      response.exception = body;
+      response.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      response.success = false;
   }
 
-  return _response;
+  return response;
 }
 
 /// Returns the response [ApiResponse] from an upload request.
@@ -74,15 +74,15 @@ ApiResponse respData(int status, String rawBody) {
 /// > * _@param: (required)_ __[StreamedResponse]__ request
 Future<ApiResponse> uploadRespData(http.StreamedResponse request) async {
   // * Collect the data of the stream
-  final _res = await request.stream.toBytes();
+  final res = await request.stream.toBytes();
 
   // * Get the body
-  final body = String.fromCharCodes(_res);
+  final body = String.fromCharCodes(res);
 
   // * Obtain the response
-  final _response = respData(request.statusCode, body);
+  final response = respData(request.statusCode, body);
 
-  return _response;
+  return response;
 }
 
 String bodyParser(Object? body) {
