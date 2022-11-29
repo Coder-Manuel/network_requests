@@ -1,0 +1,19 @@
+---
+name: "Auto Release CI"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    name: "Auto Tagged Release"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Tagged Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+          title: "Release ${{ github.ref_name }}"
+          prerelease: false

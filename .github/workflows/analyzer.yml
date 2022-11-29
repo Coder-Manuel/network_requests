@@ -1,0 +1,39 @@
+---
+name: "CI Analyze Code"
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  format_code:
+    name: Verify Code Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+      - name: Verify Code
+        run: dart format -o none --set-exit-if-changed lib
+
+  flutter_checks:
+    name: CI Analyze
+    needs: [format_code]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - name: Install Dependencies
+        run: flutter pub get
+      - name: Flutter Analyze
+        run: flutter analyze
