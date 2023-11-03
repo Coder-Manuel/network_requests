@@ -1,5 +1,5 @@
 import 'package:http/http.dart';
-import 'package:http_interceptor/http/http_methods.dart';
+import 'package:network_requests/http_interceptor/lib/http/http_methods.dart';
 
 /// Extends [MultipartRequest] to provide copied instances.
 extension MultipartRequestCopyWith on MultipartRequest {

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:http_interceptor/http_interceptor.dart';
+import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:http_interceptor/http/http_methods.dart';
+import 'package:network_requests/http_interceptor/lib/http/http_methods.dart';
 
 import './multipart_request.dart';
 import './request.dart';

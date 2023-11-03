@@ -1,4 +1,4 @@
-import 'package:http_interceptor/http_interceptor.dart';
+import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
 
 /// An interceptor that can be used on [NetworkRequest] api calls.
 ///

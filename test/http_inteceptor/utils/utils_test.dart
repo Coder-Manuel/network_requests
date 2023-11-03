@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http_interceptor/utils/utils.dart';
+import 'package:network_requests/http_interceptor/lib/utils/utils.dart';
 
 main() {
   group("buildUrlString", () {

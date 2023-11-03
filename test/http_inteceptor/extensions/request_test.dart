@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http_interceptor/http_interceptor.dart';
+import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {

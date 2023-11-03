@@ -1,6 +1,5 @@
 name: network_requests
 description: An easy-to-use http network requests handler.
-publish_to: none
 version: 2.0.0
 homepage: https://github.com/Coder-Manuel/network_requests
 
@@ -14,9 +13,6 @@ dependencies:
 
   http: ^1.1.0
   mime: ^1.0.4
-
-  http_interceptor:
-    path: ./packages/http_interceptor
 
 dev_dependencies:
   flutter_test:
