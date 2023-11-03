@@ -1,5 +1,6 @@
 name: network_requests
 description: An easy-to-use http network requests handler.
+publish_to: none
 version: 1.0.4
 homepage: https://github.com/Coder-Manuel/network_requests
 
@@ -11,14 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.13.5
+  http: ^1.1.0
   mime: ^1.0.4
-  http_interceptor: ^1.0.2
+
+  http_interceptor:
+    path: ./packages/http_interceptor
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

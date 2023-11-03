@@ -320,7 +320,7 @@ class NetworkRequest {
     Duration? timeout,
   }) async {
     // * Initiate the request client
-    final request = http.MultipartRequest(method.toUpperCase(), url);
+    final request = MultipartRequest(method.toUpperCase(), url);
 
     // * Add the provided files to the multipart request files.
     for (var i in files) {
@@ -346,7 +346,7 @@ class NetworkRequest {
 
     ApiResponse apiResponse = ApiResponse();
     try {
-      final response = await request.send().timeout(
+      final response = await _httpClient.client?.send(request).timeout(
             timeout ?? const Duration(seconds: 30),
             onTimeout: () => throw TimeoutException(
               ResponseMessage.SERVER_TIMEOUT.value,

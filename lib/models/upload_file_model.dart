@@ -1,4 +1,4 @@
-part of network_requests;
+part of '../network_requests.dart';
 
 /// The upload structure of files
 class UploadFile {
