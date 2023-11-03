@@ -1,5 +1,5 @@
 import 'package:http_interceptor/extensions/uri.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("addParameters extension", () {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 main() {
   group('BaseRequest.copyWith: ', () {

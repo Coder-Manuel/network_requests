@@ -1,5 +1,5 @@
 import 'package:http_interceptor/http/http_methods.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 main() {
   group("Can parse from string", () {
