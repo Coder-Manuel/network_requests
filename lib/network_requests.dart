@@ -19,7 +19,8 @@ import 'src/utils/utils.dart';
 /// Exports
 export 'src/http_interceptor/http_interceptor.dart'
     hide InterceptorContract, RetryPolicy, BaseClient, Response;
-export 'package:network_requests/src/interceptors/network_request_interceptor.dart';
+export 'src/interceptors/network_request_interceptor.dart';
+export 'src/utils/utils.dart' hide Logger;
 
 /// The models
 part 'src/models/response_model.dart';
