@@ -3,19 +3,35 @@
 library network_requests;
 
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
 /// 3rd party libraries
 import 'package:http/http.dart' as http;
-export 'package:network_requests/services/network_service.dart';
-export 'package:network_requests/interceptors/network_request_interceptor.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
+
+import 'src/functions/functions.dart';
+import 'src/interceptors/logging_interceptor.dart';
+import 'src/interceptors/network_request_interceptor.dart';
+import 'src/http_interceptor/http_interceptor.dart';
+import 'src/utils/utils.dart';
+
+/// Exports
+export 'src/http_interceptor/http_interceptor.dart'
+    hide
+        InterceptorContract,
+        RetryPolicy,
+        BaseClient,
+        Response,
+        Request,
+        BaseRequest,
+        BaseResponse;
+export 'src/interceptors/network_request_interceptor.dart';
+export 'src/utils/utils.dart' hide Logger;
 
 /// The models
-part 'models/response_model.dart';
-part 'models/upload_file_model.dart';
+part 'src/models/response_model.dart';
+part 'src/models/upload_file_model.dart';
 
-/// The functions
-part 'functions/network_functions.dart';
-
-/// The Utilities
-part 'utils/response_messages.dart';
+/// The Service
+part 'src/services/network_service.dart';

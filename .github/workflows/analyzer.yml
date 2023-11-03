@@ -35,5 +35,7 @@ jobs:
           channel: "stable"
       - name: Install Dependencies
         run: flutter pub get
-      - name: Flutter Analyze
+      - name: Run analyzer
         run: flutter analyze
+      - name: Run tests
+        run: flutter test

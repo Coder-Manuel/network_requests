@@ -1,7 +1,6 @@
 name: network_requests
 description: An easy-to-use http network requests handler.
-publish_to: none
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/Coder-Manuel/network_requests
 
 environment:
@@ -12,11 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  dartz: ^0.10.1
   http: ^1.1.0
   mime: ^1.0.4
-
-  http_interceptor:
-    path: ./packages/http_interceptor
+  http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_test:
