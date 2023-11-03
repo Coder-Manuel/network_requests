@@ -1,27 +1,36 @@
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:network_requests/interceptors/network_request_interceptor.dart';
 import 'package:network_requests/utils/logger_util.dart';
+import 'package:network_requests/utils/network_util.dart';
 
 class LoggingInterceptor implements NetworkRequestInterceptor {
   @override
-  Future<RequestData> interceptRequest({required RequestData data}) async {
-    final logInfo = 'REQ -> method: ${data.method.name}, url: ${data.url}';
+  Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
+    final logInfo = 'REQ -> method: ${request.method}, url: ${request.url}';
     Logger.log(logInfo);
 
-    return data;
+    return request;
   }
 
   @override
-  Future<ResponseData> interceptResponse({required ResponseData data}) async {
+  Future<BaseResponse> interceptResponse({
+    required BaseResponse response,
+  }) async {
     final logInfo =
-        'RES -> method: ${data.method?.name}, status: ${data.statusCode}, url: ${data.url}';
+        'RES -> method: ${response.request?.method}, status: ${response.statusCode}, url: ${response.request?.url}';
 
-    if (data.statusCode == 200 || data.statusCode == 201) {
+    if (NetworkUtil.isResSuccess(response.statusCode)) {
       Logger.log(logInfo);
     } else {
       Logger.logError(logInfo);
     }
 
-    return data;
+    return response;
   }
+
+  @override
+  Future<bool> shouldInterceptRequest() => Future.value(true);
+
+  @override
+  Future<bool> shouldInterceptResponse() => Future.value(true);
 }

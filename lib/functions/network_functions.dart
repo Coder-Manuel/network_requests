@@ -1,14 +1,19 @@
-part of network_requests;
+part of '../network_requests.dart';
 
 /// Return the response of the request
 ///
 /// > * _@param: (required)_ __[int]__ status => The status code from the request
 ///
 /// > * _@param: (required)_ __[String]__ body
-ApiResponse respData(int status, String rawBody) {
+ApiResponse respData(int? status, String rawBody) {
   ApiResponse response = ApiResponse();
 
   final body = rawBody.isNotEmpty ? json.decode(rawBody) : {};
+
+  if (status == null) {
+    response.data = body;
+    return response;
+  }
 
   switch (status) {
     case 200:
@@ -72,15 +77,15 @@ ApiResponse respData(int status, String rawBody) {
 /// Returns the response [ApiResponse] from an upload request.
 ///
 /// > * _@param: (required)_ __[StreamedResponse]__ request
-Future<ApiResponse> uploadRespData(http.StreamedResponse request) async {
+Future<ApiResponse> uploadRespData(http.StreamedResponse? request) async {
   // * Collect the data of the stream
-  final res = await request.stream.toBytes();
+  final res = await request?.stream.toBytes();
 
   // * Get the body
-  final body = String.fromCharCodes(res);
+  final body = String.fromCharCodes(res ?? []);
 
   // * Obtain the response
-  final response = respData(request.statusCode, body);
+  final response = respData(request?.statusCode, body);
 
   return response;
 }

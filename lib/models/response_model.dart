@@ -1,4 +1,4 @@
-part of network_requests;
+part of '../network_requests.dart';
 
 ///`
 /// REST-API Response DTO
@@ -18,9 +18,9 @@ class ApiResponse {
   dynamic _data;
   dynamic _apiError;
 
-  // Using Service not Available status code as default
-  int _status = 503;
-  String _message = '';
+  // Using default package_error status.
+  int _status = 800;
+  String _message = 'There was an internal error processing request';
   bool _success = false;
 
   ///`
