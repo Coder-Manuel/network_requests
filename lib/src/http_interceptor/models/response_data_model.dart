@@ -35,8 +35,8 @@ class ResponseData extends BaseResponse {
           persistentConnection: persistentConnection,
         );
 
-  Future<Response> get asResponse async => Response.bytes(
-        await stream.toBytes(),
+  Response get asResponse => Response(
+        body ?? '',
         statusCode,
         request: request,
         headers: headers,
