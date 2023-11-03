@@ -8,22 +8,22 @@ import '../http_interceptor/http_interceptor.dart';
 /// ```
 /// class LoggingInterceptor implements InterceptorContract {
 ///   @override
-///     Future<RequestData> interceptRequest({required RequestData data}) async {
-///     debugPrint(data.toString());
+///     Future<RequestData> interceptRequest({required RequestData request}) async {
+///     debugPrint(request.toString());
 ///
-///     return data;
+///     return request;
 ///    }
 ///
 ///    @override
-///     Future<ResponseData> interceptResponse({required ResponseData data}) async {
-///     debugPrint(data.toString());
+///     Future<ResponseData> interceptResponse({required ResponseData reponse}) async {
+///     debugPrint(response.toString());
 ///
-///     return data;
+///     return response;
 ///    }
 ///
 /// }
 /// ```
-abstract class NetworkRequestInterceptor extends InterceptorContract {}
+abstract class NetworkRequestInterceptor implements InterceptorContract {}
 
 /// A retry interceptor that can be used to retry a request.
 ///
