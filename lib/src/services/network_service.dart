@@ -1,13 +1,4 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:network_requests/src/http_interceptor/lib/http_interceptor.dart';
-// ignore: depend_on_referenced_packages
-import 'package:http_parser/http_parser.dart';
-import 'package:http/http.dart' as http;
-import 'package:mime/mime.dart';
-import 'package:network_requests/src/functions/interceptors/logging_interceptor.dart';
-import 'package:network_requests/network_requests.dart';
+part of '../../network_requests.dart';
 
 /// [NetworkRequest] client.
 class NetworkRequest {

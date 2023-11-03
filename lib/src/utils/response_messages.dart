@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-part of '../../network_requests.dart';
+part of 'utils.dart';
 
 enum ResponseMessage {
   OKAY,

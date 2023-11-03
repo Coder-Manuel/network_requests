@@ -1,4 +1,4 @@
-part of '../network_requests.dart';
+part of '../../network_requests.dart';
 
 ///`
 /// REST-API Response DTO

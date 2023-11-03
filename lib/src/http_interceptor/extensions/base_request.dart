@@ -1,11 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
-import 'package:network_requests/src/http_interceptor/lib/http/http_methods.dart';
-
-import './multipart_request.dart';
-import './request.dart';
-import './streamed_request.dart';
+import '../http_interceptor.dart';
 
 /// Extends [BaseRequest] to provide copied instances.
 extension BaseRequestCopyWith on BaseRequest {

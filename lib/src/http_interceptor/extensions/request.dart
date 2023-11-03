@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
-import 'package:network_requests/src/http_interceptor/lib/http/http_methods.dart';
+import '../http_interceptor.dart';
 
 /// Extends [Request] to provide copied instances.
 extension RequestCopyWith on Request {

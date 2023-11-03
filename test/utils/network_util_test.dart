@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:network_requests/network_requests.dart';
+import 'package:network_requests/src/utils/utils.dart';
 
 void main() {
   group('Network Util', () {

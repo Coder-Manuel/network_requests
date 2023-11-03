@@ -61,7 +61,7 @@ http_interceptor: <latest>
 ## Usage
 
 ```dart
-import 'package:network_requests/src/http_interceptor/lib/http_interceptor.dart';
+import 'package:network_requests/network_requests.dart';
 ```
 
 ### Building your own interceptor
