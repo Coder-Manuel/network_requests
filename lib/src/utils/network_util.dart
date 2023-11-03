@@ -1,4 +1,4 @@
-part of '../network_requests.dart';
+part of '../../network_requests.dart';
 
 class NetworkUtil {
   static final List<int> _successCodes = [200, 201];

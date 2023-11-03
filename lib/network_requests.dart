@@ -10,17 +10,17 @@ import 'package:flutter/foundation.dart';
 
 /// 3rd party libraries
 import 'package:http/http.dart' as http;
-export 'package:network_requests/services/network_service.dart';
-export 'package:network_requests/interceptors/network_request_interceptor.dart';
+export 'package:network_requests/src/services/network_service.dart';
+export 'package:network_requests/src/functions/interceptors/network_request_interceptor.dart';
 
 /// The models
 part 'models/response_model.dart';
 part 'models/upload_file_model.dart';
 
 /// The functions
-part 'functions/network_functions.dart';
+part 'src/functions/network_functions.dart';
 
 /// The Utilities
-part 'utils/response_messages.dart';
-part 'utils/logger_util.dart';
-part 'utils/network_util.dart';
+part 'src/utils/response_messages.dart';
+part 'src/utils/logger_util.dart';
+part 'src/utils/network_util.dart';

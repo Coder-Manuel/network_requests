@@ -1,4 +1,4 @@
-part of '../network_requests.dart';
+part of '../../network_requests.dart';
 
 @protected
 class Logger {

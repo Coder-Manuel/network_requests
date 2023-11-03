@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
+import 'package:network_requests/src/http_interceptor/lib/http_interceptor.dart';
 import 'package:network_requests/network_requests.dart';
 
 @protected

@@ -1,4 +1,4 @@
-part of '../network_requests.dart';
+part of '../../network_requests.dart';
 
 /// Return the response of the request
 ///

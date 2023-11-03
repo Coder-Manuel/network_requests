@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
+import 'package:network_requests/src/http_interceptor/lib/http_interceptor.dart';
 
 /// Class to be used by the user as a replacement for 'http' with interceptor
 /// support.

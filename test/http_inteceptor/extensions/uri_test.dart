@@ -1,4 +1,4 @@
-import 'package:network_requests/http_interceptor/lib/extensions/uri.dart';
+import 'package:network_requests/src/http_interceptor/lib/extensions/uri.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
