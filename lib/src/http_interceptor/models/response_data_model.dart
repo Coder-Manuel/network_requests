@@ -3,13 +3,17 @@ import 'package:http/http.dart';
 typedef RequestData = BaseRequest;
 
 class ResponseData extends BaseResponse {
+  @override
+  // ignore: overridden_fields
+  int statusCode;
+
   ByteStream stream;
 
   String? body;
 
   ResponseData({
     required this.stream,
-    required int statusCode,
+    required this.statusCode,
     this.body,
     BaseRequest? request,
     int? contentLength,
