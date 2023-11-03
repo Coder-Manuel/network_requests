@@ -23,7 +23,7 @@ import '../http_interceptor/http_interceptor.dart';
 ///
 /// }
 /// ```
-abstract class NetworkRequestInterceptor implements InterceptorContract {}
+abstract class NetworkRequestInterceptor extends InterceptorContract {}
 
 /// A retry interceptor that can be used to retry a request.
 ///

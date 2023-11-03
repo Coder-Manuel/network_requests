@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import '../extensions/base_request.dart';
 import '../extensions/uri.dart';
 import '../models/interceptor_contract.dart';
+import '../models/response_data_model.dart';
 import '../models/retry_policy.dart';
 import 'http_methods.dart';
 
@@ -266,20 +267,38 @@ class InterceptedClient extends BaseClient {
 
   /// Attempts to perform the request and intercept the data
   /// of the response
-  Future<BaseResponse> _attemptRequest(BaseRequest request,
-      {bool isStream = false}) async {
-    BaseResponse response;
+  Future<ResponseData> _attemptRequest(
+    BaseRequest request, {
+    bool isStream = false,
+  }) async {
+    ResponseData response;
     try {
       // Intercept request
       final interceptedRequest = await _interceptRequest(request);
 
-      var stream = requestTimeout == null
+      final stream = requestTimeout == null
           ? await _inner.send(interceptedRequest)
           : await _inner
               .send(interceptedRequest)
               .timeout(requestTimeout!, onTimeout: onRequestTimeout);
 
-      response = isStream ? stream : await Response.fromStream(stream);
+      Response? data;
+
+      if (!isStream) {
+        data = await Response.fromStream(stream);
+      }
+
+      response = ResponseData(
+        statusCode: stream.statusCode,
+        stream: stream.stream,
+        body: data?.body,
+        request: request,
+        headers: stream.headers,
+        contentLength: stream.contentLength,
+        reasonPhrase: stream.reasonPhrase,
+        isRedirect: stream.isRedirect,
+        persistentConnection: stream.persistentConnection,
+      );
 
       if (retryPolicy != null &&
           retryPolicy!.maxRetryAttempts > _retryCount &&
@@ -307,9 +326,7 @@ class InterceptedClient extends BaseClient {
     BaseRequest interceptedRequest = request.copyWith();
     for (InterceptorContract interceptor in interceptors) {
       if (await interceptor.shouldInterceptRequest()) {
-        interceptedRequest = await interceptor.interceptRequest(
-          request: interceptedRequest,
-        );
+        interceptedRequest = await interceptor.interceptRequest(request);
       }
     }
 
@@ -317,13 +334,11 @@ class InterceptedClient extends BaseClient {
   }
 
   /// This internal function intercepts the response.
-  Future<BaseResponse> _interceptResponse(BaseResponse response) async {
-    BaseResponse interceptedResponse = response;
+  Future<ResponseData> _interceptResponse(ResponseData response) async {
+    ResponseData interceptedResponse = response;
     for (InterceptorContract interceptor in interceptors) {
       if (await interceptor.shouldInterceptResponse()) {
-        interceptedResponse = await interceptor.interceptResponse(
-          response: interceptedResponse,
-        );
+        interceptedResponse = await interceptor.interceptResponse(response);
       }
     }
 

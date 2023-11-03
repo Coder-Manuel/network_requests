@@ -1,22 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:network_requests/network_requests.dart';
 
+import '../http_interceptor/models/response_data_model.dart';
 import '../utils/utils.dart';
 
 @protected
 class LoggingInterceptor implements NetworkRequestInterceptor {
   @override
-  Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
+  Future<RequestData> interceptRequest(RequestData request) async {
     final logInfo = 'REQ -> method: ${request.method}, url: ${request.url}';
     Logger.log(logInfo);
 
-    return request;
+    return request.copyWith();
   }
 
   @override
-  Future<BaseResponse> interceptResponse({
-    required BaseResponse response,
-  }) async {
+  Future<ResponseData> interceptResponse(ResponseData response) async {
     final logInfo =
         'RES -> method: ${response.request?.method}, status: ${response.statusCode}, url: ${response.request?.url}';
 

@@ -1,4 +1,4 @@
-import 'package:http/http.dart';
+import 'package:network_requests/src/http_interceptor/models/response_data_model.dart';
 
 ///Interceptor interface to create custom Interceptor for http.
 ///Extend this class and override the functions that you want
@@ -28,9 +28,9 @@ import 'package:http/http.dart';
 abstract class InterceptorContract {
   Future<bool> shouldInterceptRequest() async => true;
 
-  Future<BaseRequest> interceptRequest({required BaseRequest request});
+  Future<RequestData> interceptRequest(RequestData request);
 
   Future<bool> shouldInterceptResponse() async => true;
 
-  Future<BaseResponse> interceptResponse({required BaseResponse response});
+  Future<ResponseData> interceptResponse(ResponseData response);
 }
