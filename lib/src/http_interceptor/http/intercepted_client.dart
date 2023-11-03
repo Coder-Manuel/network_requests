@@ -107,7 +107,8 @@ class InterceptedClient extends BaseClient {
         method: HttpMethod.HEAD,
         url: url,
         headers: headers,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<Response> get(
@@ -120,7 +121,8 @@ class InterceptedClient extends BaseClient {
         url: url,
         headers: headers,
         params: params,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<Response> post(
@@ -137,7 +139,8 @@ class InterceptedClient extends BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<Response> put(
@@ -154,7 +157,8 @@ class InterceptedClient extends BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<Response> patch(
@@ -171,7 +175,8 @@ class InterceptedClient extends BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<Response> delete(
@@ -188,7 +193,8 @@ class InterceptedClient extends BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as Response;
+      ))
+          .asResponse;
 
   @override
   Future<String> read(
@@ -220,10 +226,10 @@ class InterceptedClient extends BaseClient {
 
     final interceptedResponse = await _interceptResponse(response);
 
-    return interceptedResponse as StreamedResponse;
+    return interceptedResponse.asStreamedResponse;
   }
 
-  Future<BaseResponse> _sendUnstreamed({
+  Future<ResponseData> _sendUnstreamed({
     required HttpMethod method,
     required Uri url,
     Map<String, String>? headers,

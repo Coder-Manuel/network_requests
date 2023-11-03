@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:http/http.dart';
 
 typedef RequestData = BaseRequest;
@@ -10,6 +12,8 @@ class ResponseData extends BaseResponse {
   ByteStream stream;
 
   String? body;
+
+  Future<Uint8List> get bodyBytes => stream.toBytes();
 
   ResponseData({
     required this.stream,
@@ -30,4 +34,25 @@ class ResponseData extends BaseResponse {
           isRedirect: isRedirect,
           persistentConnection: persistentConnection,
         );
+
+  Future<Response> get asResponse async => Response.bytes(
+        await stream.toBytes(),
+        statusCode,
+        request: request,
+        headers: headers,
+        isRedirect: isRedirect,
+        reasonPhrase: reasonPhrase,
+        persistentConnection: persistentConnection,
+      );
+
+  StreamedResponse get asStreamedResponse => StreamedResponse(
+        stream,
+        statusCode,
+        request: request,
+        headers: headers,
+        contentLength: contentLength,
+        isRedirect: isRedirect,
+        reasonPhrase: reasonPhrase,
+        persistentConnection: persistentConnection,
+      );
 }
