@@ -18,3 +18,4 @@ export './http/intercepted_http.dart';
 export './models/http_interceptor_exception.dart';
 export './models/interceptor_contract.dart';
 export './models/retry_policy.dart';
+export './models/response_data_model.dart';
