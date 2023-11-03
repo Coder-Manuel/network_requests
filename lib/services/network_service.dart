@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 import 'package:network_requests/interceptors/logging_interceptor.dart';
 import 'package:network_requests/network_requests.dart';
-import 'package:network_requests/utils/logger_util.dart';
 
 /// [NetworkRequest] client.
 class NetworkRequest {

@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:network_requests/http_interceptor/lib/http_interceptor.dart';
-import 'package:network_requests/interceptors/network_request_interceptor.dart';
-import 'package:network_requests/utils/logger_util.dart';
-import 'package:network_requests/utils/network_util.dart';
+import 'package:network_requests/network_requests.dart';
 
+@protected
 class LoggingInterceptor implements NetworkRequestInterceptor {
   @override
   Future<BaseRequest> interceptRequest({required BaseRequest request}) async {

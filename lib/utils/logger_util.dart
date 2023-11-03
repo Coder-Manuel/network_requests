@@ -1,5 +1,6 @@
-import 'dart:developer' as developer;
+part of '../network_requests.dart';
 
+@protected
 class Logger {
   /// Logs out message but must be used with DartVM
   static void log(String message) {

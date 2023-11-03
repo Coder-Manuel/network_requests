@@ -4,6 +4,9 @@ library network_requests;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as developer;
+
+import 'package:flutter/foundation.dart';
 
 /// 3rd party libraries
 import 'package:http/http.dart' as http;
@@ -19,3 +22,5 @@ part 'functions/network_functions.dart';
 
 /// The Utilities
 part 'utils/response_messages.dart';
+part 'utils/logger_util.dart';
+part 'utils/network_util.dart';
