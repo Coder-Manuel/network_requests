@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:network_requests/network_requests.dart';
 
-import '../http_interceptor/models/response_data_model.dart';
 import '../utils/utils.dart';
 
 @protected
