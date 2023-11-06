@@ -103,8 +103,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -162,8 +162,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -221,8 +221,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -279,8 +279,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -356,8 +356,7 @@ class NetworkRequest {
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;

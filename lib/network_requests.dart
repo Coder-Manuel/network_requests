@@ -32,6 +32,7 @@ export 'src/utils/utils.dart' hide Logger;
 /// The models
 part 'src/models/response_model.dart';
 part 'src/models/upload_file_model.dart';
+part 'src/models/network_request_exception.dart';
 
 /// The Service
 part 'src/services/network_service.dart';
