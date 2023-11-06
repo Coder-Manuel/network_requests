@@ -304,8 +304,8 @@ class NetworkRequest {
   Future<ApiResponse> uploadFile(
     Uri url, {
     required String method,
+    required List<UploadFile> files,
     Map<String, String>? headers,
-    List<UploadFile> files = const [],
     Map<String, String>? otherFields,
     Duration? timeout,
   }) async {
@@ -336,10 +336,7 @@ class NetworkRequest {
 
     ApiResponse apiResponse = ApiResponse();
     try {
-      Logger.log(
-        '============= HTTP CLIENT: ${_httpClient.client?.toString()}',
-      );
-      final response = await _httpClient.client?.send(request).timeout(
+      final response = await _httpClient.send(request).timeout(
             timeout ?? const Duration(seconds: 30),
             onTimeout: () => throw TimeoutException(
               ResponseMessage.SERVER_TIMEOUT.value,

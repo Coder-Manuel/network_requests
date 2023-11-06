@@ -19,8 +19,8 @@ class ApiResponse {
   dynamic _apiError;
 
   // Using default package_error status.
-  int _status = 800;
-  String _message = 'There was an internal error processing request';
+  int _status = 8001;
+  String _message = 'There was an error processing request';
   bool _success = false;
 
   ///`
