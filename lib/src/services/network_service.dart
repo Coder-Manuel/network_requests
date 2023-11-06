@@ -336,6 +336,9 @@ class NetworkRequest {
 
     ApiResponse apiResponse = ApiResponse();
     try {
+      Logger.log(
+        '============= HTTP CLIENT: ${_httpClient.client?.toString()}',
+      );
       final response = await _httpClient.client?.send(request).timeout(
             timeout ?? const Duration(seconds: 30),
             onTimeout: () => throw TimeoutException(
@@ -355,6 +358,7 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
+      Logger.logError('ERROR: ${e.toString()}');
       apiResponse.exception = e;
       apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
     }
