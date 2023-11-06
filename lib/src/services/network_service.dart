@@ -347,4 +347,11 @@ class NetworkRequest {
 
     return apiResponse;
   }
+
+  /// Executes client.send with a new [Client] instance and closes it after it has been used.
+  /// This allows you to create custom logics e.g show upload progress.
+  ///
+  /// > * _@param: (required)_ __[BaseRequest]__
+  Future<StreamedResponse> send(BaseRequest request) =>
+      _httpClient.send(request);
 }
