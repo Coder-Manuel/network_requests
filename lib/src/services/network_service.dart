@@ -86,9 +86,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -145,9 +142,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -204,9 +198,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -262,9 +253,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -335,12 +323,10 @@ class NetworkRequest {
     }
 
     ApiResponse apiResponse = ApiResponse();
+
     try {
       final response = await _httpClient.send(request).timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
