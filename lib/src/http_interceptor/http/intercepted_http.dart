@@ -220,6 +220,11 @@ class InterceptedHttp {
             params: params,
           ));
 
+  /// Executes `client.send` with a new [Client] instance and closes it
+  /// after it has been used.
+  Future<StreamedResponse> send(BaseRequest request) =>
+      _withClient((client) => client.send(request));
+
   /// Internal convenience utility to create a new [Client] instance for each
   /// request. It closes the client after using it for the request.
   Future<T> _withClient<T>(

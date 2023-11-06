@@ -86,9 +86,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -103,8 +100,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -145,9 +142,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -162,8 +156,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -204,9 +198,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -221,8 +212,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -262,9 +253,6 @@ class NetworkRequest {
           )
           .timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -279,8 +267,8 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
@@ -304,8 +292,8 @@ class NetworkRequest {
   Future<ApiResponse> uploadFile(
     Uri url, {
     required String method,
+    required List<UploadFile> files,
     Map<String, String>? headers,
-    List<UploadFile> files = const [],
     Map<String, String>? otherFields,
     Duration? timeout,
   }) async {
@@ -335,12 +323,10 @@ class NetworkRequest {
     }
 
     ApiResponse apiResponse = ApiResponse();
+
     try {
-      final response = await _httpClient.client?.send(request).timeout(
+      final response = await _httpClient.send(request).timeout(
             timeout ?? const Duration(seconds: 30),
-            onTimeout: () => throw TimeoutException(
-              ResponseMessage.SERVER_TIMEOUT.value,
-            ),
           );
 
       // * Set the response
@@ -355,10 +341,17 @@ class NetworkRequest {
       apiResponse.exception = ResponseMessage.NO_INTERNET;
       apiResponse.message = ResponseMessage.NO_INTERNET.value;
     } catch (e) {
-      apiResponse.exception = e;
-      apiResponse.message = ResponseMessage.SOMETHING_WENT_WRONG.value;
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
     }
 
     return apiResponse;
   }
+
+  /// Executes client.send with a new [Client] instance and closes it after it has been used.
+  /// This allows you to create custom logics e.g show upload progress.
+  ///
+  /// > * _@param: (required)_ __[BaseRequest]__
+  Future<StreamedResponse> send(BaseRequest request) =>
+      _httpClient.send(request);
 }
