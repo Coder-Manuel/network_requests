@@ -90,6 +90,7 @@ class NetworkRequest {
 
       // * Set the response
       apiResponse = respData(response.statusCode, response.body);
+      apiResponse.bytes = response.bodyBytes;
     } on TimeoutException {
       apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
       apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
@@ -146,6 +147,7 @@ class NetworkRequest {
 
       // * Set the response
       apiResponse = respData(response.statusCode, response.body);
+      apiResponse.bytes = response.bodyBytes;
     } on TimeoutException {
       apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
       apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
@@ -202,6 +204,7 @@ class NetworkRequest {
 
       // * Set the response
       apiResponse = respData(response.statusCode, response.body);
+      apiResponse.bytes = response.bodyBytes;
     } on TimeoutException {
       apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
       apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
@@ -257,6 +260,7 @@ class NetworkRequest {
 
       // * Set the response
       apiResponse = respData(response.statusCode, response.body);
+      apiResponse.bytes = response.bodyBytes;
     } on TimeoutException {
       apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
       apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
