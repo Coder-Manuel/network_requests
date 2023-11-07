@@ -17,6 +17,7 @@ part of '../../network_requests.dart';
 class ApiResponse {
   dynamic _data;
   dynamic _apiError;
+  Uint8List bytes = Uint8List.fromList([]);
 
   // Using default package_error status.
   int _status = 8001;
