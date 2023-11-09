@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import '../extensions/base_request.dart';
 import '../extensions/uri.dart';
 import '../models/interceptor_contract.dart';
+import '../models/request_data_model.dart';
 import '../models/response_data_model.dart';
 import '../models/retry_policy.dart';
 import 'http_methods.dart';
@@ -298,7 +299,7 @@ class InterceptedClient extends BaseClient {
         statusCode: stream.statusCode,
         stream: stream.stream,
         body: data?.body,
-        request: request,
+        request: RequestData.fromBaseRequest(request),
         headers: stream.headers,
         contentLength: stream.contentLength,
         reasonPhrase: stream.reasonPhrase,

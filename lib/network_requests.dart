@@ -25,7 +25,6 @@ export 'src/http_interceptor/http_interceptor.dart'
         BaseClient,
         Response,
         Request,
-        BaseRequest,
         BaseResponse;
 export 'src/interceptors/network_request_interceptor.dart';
 export 'src/utils/utils.dart' hide Logger;
