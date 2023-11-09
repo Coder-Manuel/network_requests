@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:http/http.dart';
-
-typedef RequestData = BaseRequest;
+import '../http_interceptor.dart';
 
 class ResponseData extends BaseResponse {
   @override
@@ -19,7 +17,7 @@ class ResponseData extends BaseResponse {
     required this.stream,
     required this.statusCode,
     this.body,
-    BaseRequest? request,
+    RequestData? request,
     int? contentLength,
     String? reasonPhrase,
     Map<String, String> headers = const {},

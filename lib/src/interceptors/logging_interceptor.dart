@@ -6,11 +6,11 @@ import '../utils/utils.dart';
 @protected
 class LoggingInterceptor implements NetworkRequestInterceptor {
   @override
-  Future<RequestData> interceptRequest(RequestData request) async {
+  Future<BaseRequest> interceptRequest(BaseRequest request) async {
     final logInfo = 'REQ -> method: ${request.method}, url: ${request.url}';
     Logger.log(logInfo);
 
-    return request.copyWith();
+    return request;
   }
 
   @override
