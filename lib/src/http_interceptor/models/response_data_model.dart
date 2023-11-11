@@ -1,11 +1,15 @@
+// ignore_for_file: overridden_fields
+
 import 'dart:typed_data';
 
 import '../http_interceptor.dart';
 
 class ResponseData extends BaseResponse {
   @override
-  // ignore: overridden_fields
   int statusCode;
+
+  @override
+  RequestData? request;
 
   ByteStream stream;
 
@@ -17,7 +21,7 @@ class ResponseData extends BaseResponse {
     required this.stream,
     required this.statusCode,
     this.body,
-    RequestData? request,
+    this.request,
     int? contentLength,
     String? reasonPhrase,
     Map<String, String> headers = const {},

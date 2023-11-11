@@ -14,7 +14,7 @@ class RequestData extends BaseRequest {
   bool persistentConnection;
 
   // Request only variables.
-  dynamic body;
+  String? body;
   Encoding? encoding;
 
   // MultipartRequest only properties.
@@ -35,7 +35,7 @@ class RequestData extends BaseRequest {
   }) : super(method, url);
 
   factory RequestData.fromBaseRequest(BaseRequest request) {
-    dynamic reqBody;
+    String? reqBody;
     Encoding? reqEncoding;
     Map<String, String>? reqFields;
     List<MultipartFile>? reqFiles;
