@@ -89,17 +89,16 @@ class NetworkRequest {
           );
 
       // * Set the response
-      apiResponse = respData(response.statusCode, response.body);
-      apiResponse.bytes = response.bodyBytes;
+      apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.data = ResponseMessage.serverTimeout;
+      apiResponse.message = ResponseMessage.serverTimeout.value;
     } on SocketException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } on http.ClientException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -146,17 +145,16 @@ class NetworkRequest {
           );
 
       // * Set the response
-      apiResponse = respData(response.statusCode, response.body);
-      apiResponse.bytes = response.bodyBytes;
+      apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.data = ResponseMessage.serverTimeout;
+      apiResponse.message = ResponseMessage.serverTimeout.value;
     } on SocketException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } on http.ClientException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -203,17 +201,16 @@ class NetworkRequest {
           );
 
       // * Set the response
-      apiResponse = respData(response.statusCode, response.body);
-      apiResponse.bytes = response.bodyBytes;
+      apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.data = ResponseMessage.serverTimeout;
+      apiResponse.message = ResponseMessage.serverTimeout.value;
     } on SocketException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } on http.ClientException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -259,17 +256,16 @@ class NetworkRequest {
           );
 
       // * Set the response
-      apiResponse = respData(response.statusCode, response.body);
-      apiResponse.bytes = response.bodyBytes;
+      apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.data = ResponseMessage.serverTimeout;
+      apiResponse.message = ResponseMessage.serverTimeout.value;
     } on SocketException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } on http.ClientException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -336,14 +332,14 @@ class NetworkRequest {
       // * Set the response
       apiResponse = await uploadRespData(response);
     } on TimeoutException {
-      apiResponse.exception = ResponseMessage.SERVER_TIMEOUT;
-      apiResponse.message = ResponseMessage.SERVER_TIMEOUT.value;
+      apiResponse.data = ResponseMessage.serverTimeout;
+      apiResponse.message = ResponseMessage.serverTimeout.value;
     } on SocketException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } on http.ClientException {
-      apiResponse.exception = ResponseMessage.NO_INTERNET;
-      apiResponse.message = ResponseMessage.NO_INTERNET.value;
+      apiResponse.data = ResponseMessage.noInternet;
+      apiResponse.message = ResponseMessage.noInternet.value;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);

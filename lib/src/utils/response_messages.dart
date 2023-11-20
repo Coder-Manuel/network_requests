@@ -1,23 +1,33 @@
-// ignore_for_file: constant_identifier_names
-
 part of 'utils.dart';
 
 enum ResponseMessage {
-  OKAY,
-  CREATED,
-  BAD_REQUEST,
-  UNAUTHORIZED,
-  FORBIDDEN,
-  NOT_FOUND,
-  METHOD_NOT_ALLOWED,
-  INTERNAL_SERVER_ERROR,
-  SOMETHING_WENT_WRONG,
-  NO_INTERNET,
-  SERVER_TIMEOUT,
-  HANDSHAKE_ERROR,
+  okay,
+  created,
+  badRequest,
+  unAuthorized,
+  forbidden,
+  notFound,
+  methodNotAllowed,
+  internalServerError,
+  badGateway,
+  somethingWentWrong,
+  noInternet,
+  serverTimeout,
+  handshakeError,
 }
 
-extension EnumValue on ResponseMessage {
+extension Message on ResponseMessage {
   /// The Value of the Response message
-  String get value => toString().split('.').last;
+  String? get value {
+    switch (this) {
+      case ResponseMessage.noInternet:
+        return 'No internet connection.\nEnsure you have a stable internet.';
+      case ResponseMessage.internalServerError:
+        return 'We encountered an unexpected glitch.\nPlease try again later.';
+      case ResponseMessage.badGateway:
+        return 'Server is temporarily down.\nWe apologize for the inconvenience.';
+      default:
+        return null;
+    }
+  }
 }

@@ -16,12 +16,11 @@ part of '../../network_requests.dart';
 ///
 class ApiResponse {
   dynamic _data;
-  dynamic _apiError;
   Uint8List bytes = Uint8List.fromList([]);
 
   // Using default package_error status.
   int _status = 8001;
-  String _message = 'There was an error processing request';
+  String? _message;
   bool _success = false;
 
   ///`
@@ -41,42 +40,26 @@ class ApiResponse {
   }
 
   ///`
-  /// The Error received from the RestAPI Request
-  ///`
-  get exception => _apiError;
-
-  ///`
-  /// Set The Error received from the RestAPI Request
-  ///`
-  set exception(error) {
-    var val = 2;
-    // Added this if statement just to avoid the unnecessary getter/setter linter
-    if (val == 2) {
-      _apiError = error;
-    }
-  }
-
-  ///`
   /// The Status-Code received from the RestAPI Request
   ///`
-  int get status => _status;
+  int get statusCode => _status;
 
   ///`
   /// Set The Status-Code received from the RestAPI Request
   ///`
-  set status(int value) {
+  set statusCode(int value) {
     if (true) _status = value;
   }
 
   ///`
   /// The Status-Code Message received from the RestAPI Request
   ///`
-  String get message => _message;
+  String? get message => _message;
 
   ///`
   /// Set The Status-Code Message received from the RestAPI Request
   ///`
-  set message(String msg) {
+  set message(String? msg) {
     if (true) _message = msg;
   }
 
@@ -88,7 +71,7 @@ class ApiResponse {
   ///`
   /// Set The Success status of the RestAPI Request
   ///`
-  set success(bool value) {
-    if (true) _success = value;
+  set isSuccess(bool value) {
+    if (1 == 1) _success = value;
   }
 }
