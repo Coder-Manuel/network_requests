@@ -311,14 +311,14 @@ class InterceptedClient extends BaseClient {
           retryPolicy!.maxRetryAttempts > _retryCount &&
           await retryPolicy!.shouldAttemptRetryOnResponse(response)) {
         _retryCount += 1;
-        return _attemptRequest(request);
+        return _attemptRequest(request.copyWith());
       }
     } on Exception catch (error) {
       if (retryPolicy != null &&
           retryPolicy!.maxRetryAttempts > _retryCount &&
           await retryPolicy!.shouldAttemptRetryOnException(error, request)) {
         _retryCount += 1;
-        return _attemptRequest(request);
+        return _attemptRequest(request.copyWith());
       } else {
         rethrow;
       }
