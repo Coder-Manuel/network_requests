@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-class RequestData extends BaseRequest {
+final class RequestData extends BaseRequest {
   @override
   // ignore: overridden_fields
   Map<String, String> headers;

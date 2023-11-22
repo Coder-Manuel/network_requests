@@ -1,7 +1,7 @@
 part of '../../network_requests.dart';
 
 /// [NetworkRequest] client.
-class NetworkRequest {
+final class NetworkRequest {
   static NetworkRequest? _instance;
 
   late InterceptedHttp _httpClient;
@@ -56,6 +56,8 @@ class NetworkRequest {
     _httpClient.interceptors.insert(0, value);
   }
 
+  final defaultTimeout = const Duration(seconds: 45);
+
   /// Sends a GET request with the given headers to the given URL.
   /// > * _@param: (required)_ __[Uri]__
   ///
@@ -84,21 +86,22 @@ class NetworkRequest {
             url,
             headers: headers,
           )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+          .timeout(timeout ?? defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
       apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
     } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
     } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -140,21 +143,22 @@ class NetworkRequest {
             headers: headers,
             body: bodyParser(body),
           )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+          .timeout(timeout ?? defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
       apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
     } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
     } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -196,24 +200,22 @@ class NetworkRequest {
             headers: headers,
             body: bodyParser(body),
           )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+          .timeout(timeout ?? defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
       apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
     } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
     } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
     }
 
     return apiResponse;
@@ -251,24 +253,22 @@ class NetworkRequest {
             headers: headers,
             body: bodyParser(body),
           )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+          .timeout(timeout ?? defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
     } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
       apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
     } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
     } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
     }
 
     return apiResponse;
@@ -315,7 +315,9 @@ class NetworkRequest {
     }
 
     // * Add headers.
-    request.headers.addAll(headers ?? {});
+    if (headers != null) {
+      request.headers.addAll(headers);
+    }
 
     // * Add any extra fields that might be passed.
     if (otherFields != null) {
@@ -325,24 +327,23 @@ class NetworkRequest {
     ApiResponse apiResponse = ApiResponse();
 
     try {
-      final response = await _httpClient.send(request).timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+      final response =
+          await _httpClient.send(request).timeout(timeout ?? defaultTimeout);
 
       // * Set the response
       apiResponse = await uploadRespData(response);
     } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
       apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
     } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
     } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
       apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
     }
 
     return apiResponse;

@@ -4,7 +4,7 @@ import 'package:network_requests/network_requests.dart';
 import '../utils/utils.dart';
 
 @protected
-class LoggingInterceptor implements NetworkRequestInterceptor {
+final class LoggingInterceptor implements NetworkRequestInterceptor {
   @override
   Future<BaseRequest> interceptRequest(BaseRequest request) async {
     final logInfo = 'REQ -> method: ${request.method}, url: ${request.url}';

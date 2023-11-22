@@ -1,6 +1,6 @@
 part of '../../network_requests.dart';
 
-class NetworkRequestException implements Exception {
+final class NetworkRequestException implements Exception {
   final dynamic message;
 
   final int errorCode;

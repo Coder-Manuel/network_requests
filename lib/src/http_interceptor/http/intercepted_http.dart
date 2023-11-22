@@ -34,7 +34,7 @@ import '../http_interceptor.dart';
 ///  http.read(...);
 ///  http.readBytes(...);
 /// ```
-class InterceptedHttp {
+final class InterceptedHttp {
   /// List of interceptors that will be applied to the requests and responses.
   final List<InterceptorContract> interceptors;
 
