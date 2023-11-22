@@ -56,7 +56,7 @@ final class NetworkRequest {
     _httpClient.interceptors.insert(0, value);
   }
 
-  final defaultTimeout = const Duration(seconds: 45);
+  final _defaultTimeout = const Duration(seconds: 45);
 
   /// Sends a GET request with the given headers to the given URL.
   /// > * _@param: (required)_ __[Uri]__
@@ -66,17 +66,17 @@ final class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> get(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Duration? timeout,
   }) async {
     ApiResponse apiResponse = ApiResponse();
@@ -85,8 +85,9 @@ final class NetworkRequest {
           .get(
             url,
             headers: headers,
+            params: params,
           )
-          .timeout(timeout ?? defaultTimeout);
+          .timeout(timeout ?? _defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
@@ -121,17 +122,17 @@ final class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> post(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
@@ -141,9 +142,10 @@ final class NetworkRequest {
           .post(
             url,
             headers: headers,
+            params: params,
             body: bodyParser(body),
           )
-          .timeout(timeout ?? defaultTimeout);
+          .timeout(timeout ?? _defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
@@ -178,17 +180,17 @@ final class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> put(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
@@ -198,9 +200,65 @@ final class NetworkRequest {
           .put(
             url,
             headers: headers,
+            params: params,
             body: bodyParser(body),
           )
-          .timeout(timeout ?? defaultTimeout);
+          .timeout(timeout ?? _defaultTimeout);
+
+      // * Set the response
+      apiResponse = respData(response);
+    } on TimeoutException {
+      apiResponse.message = ResponseMessage.serverTimeout.value;
+      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
+    } on SocketException {
+      apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on http.ClientException {
+      apiResponse.message = ResponseMessage.noInternet.value;
+      apiResponse.statusCode = ResponseMessage.noInternet.code;
+    } on HandshakeException {
+      apiResponse.message = ResponseMessage.handshakeError.value;
+      apiResponse.statusCode = ResponseMessage.handshakeError.code;
+    }
+
+    return apiResponse;
+  }
+
+  /// Sends a PATCH request with the given headers and body to the given URL.
+  ///
+  /// > * _@param: (required)_ __[Uri]__
+  ///
+  /// > * _@param:_ __[Map<String, String>?]__ headers
+  ///
+  /// > * _@param:_ __[Object?]__ body
+  ///
+  /// > * _@param:_ __[Duration?]__ timeout
+  ///
+  /// Pass in a [timeout] if you want more customization, the default
+  /// set to 45 seconds
+  ///
+  /// If the `success` property is `false`, then that simply means the `request`
+  /// `failed`.
+  ///
+  /// This automatically initializes a new [Client] and closes that client once
+  /// the request is complete.
+  Future<ApiResponse> patch(
+    Uri url, {
+    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Object? body,
+    Duration? timeout,
+  }) async {
+    ApiResponse apiResponse = ApiResponse();
+    try {
+      final response = await _httpClient
+          .patch(
+            url,
+            headers: headers,
+            params: params,
+            body: bodyParser(body),
+          )
+          .timeout(timeout ?? _defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
@@ -231,17 +289,17 @@ final class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> delete(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
@@ -251,9 +309,10 @@ final class NetworkRequest {
           .delete(
             url,
             headers: headers,
+            params: params,
             body: bodyParser(body),
           )
-          .timeout(timeout ?? defaultTimeout);
+          .timeout(timeout ?? _defaultTimeout);
 
       // * Set the response
       apiResponse = respData(response);
@@ -328,7 +387,7 @@ final class NetworkRequest {
 
     try {
       final response =
-          await _httpClient.send(request).timeout(timeout ?? defaultTimeout);
+          await _httpClient.send(request).timeout(timeout ?? _defaultTimeout);
 
       // * Set the response
       apiResponse = await uploadRespData(response);
