@@ -3,7 +3,6 @@
 library network_requests;
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 
 /// 3rd party libraries

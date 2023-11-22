@@ -73,13 +73,13 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  Future<ApiResponse> get(
+  FutureOr<ApiResponse> get(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Duration? timeout,
-  }) async {
-    final apiResponse = await TryCatcher.handleResponse(
+  }) {
+    return TryCatcher.resolve(
       () async {
         final response = await _httpClient
             .get(
@@ -92,8 +92,6 @@ final class NetworkRequest {
         return respData(response);
       },
     );
-
-    return apiResponse;
   }
 
   /// Sends a POST request with the given headers and body to the given URL.
@@ -114,14 +112,14 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  Future<ApiResponse> post(
+  FutureOr<ApiResponse> post(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) async {
-    final apiResponse = await TryCatcher.handleResponse(
+  }) {
+    return TryCatcher.resolve(
       () async {
         final response = await _httpClient
             .post(
@@ -135,8 +133,6 @@ final class NetworkRequest {
         return respData(response);
       },
     );
-
-    return apiResponse;
   }
 
   /// Sends a PUT request with the given headers and body to the given URL.
@@ -157,41 +153,27 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  Future<ApiResponse> put(
+  FutureOr<ApiResponse> put(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .put(
-            url,
-            headers: headers,
-            params: params,
-            body: bodyParser(body),
-          )
-          .timeout(timeout ?? _defaultTimeout);
+  }) {
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .put(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
-    } on SocketException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on http.ClientException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on HandshakeException {
-      apiResponse.message = ResponseMessage.handshakeError.value;
-      apiResponse.statusCode = ResponseMessage.handshakeError.code;
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a PATCH request with the given headers and body to the given URL.
@@ -212,41 +194,27 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  Future<ApiResponse> patch(
+  FutureOr<ApiResponse> patch(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .patch(
-            url,
-            headers: headers,
-            params: params,
-            body: bodyParser(body),
-          )
-          .timeout(timeout ?? _defaultTimeout);
+  }) {
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .patch(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
-    } on SocketException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on http.ClientException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on HandshakeException {
-      apiResponse.message = ResponseMessage.handshakeError.value;
-      apiResponse.statusCode = ResponseMessage.handshakeError.code;
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a DELETE request with the given headers to the given URL.
@@ -266,41 +234,27 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  Future<ApiResponse> delete(
+  FutureOr<ApiResponse> delete(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .delete(
-            url,
-            headers: headers,
-            params: params,
-            body: bodyParser(body),
-          )
-          .timeout(timeout ?? _defaultTimeout);
+  }) {
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .post(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
-    } on SocketException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on http.ClientException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on HandshakeException {
-      apiResponse.message = ResponseMessage.handshakeError.value;
-      apiResponse.statusCode = ResponseMessage.handshakeError.code;
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a [MultipartRequest] to upload [files] with the given [headers] to the provided [url].
@@ -318,7 +272,7 @@ final class NetworkRequest {
   /// > * _@param:_ __[List<UploadFile>]__ files
   ///
 
-  Future<ApiResponse> uploadFile(
+  FutureOr<ApiResponse> uploadFile(
     Uri url, {
     required String method,
     required List<UploadFile> files,
@@ -353,35 +307,26 @@ final class NetworkRequest {
       request.fields.addAll(otherFields);
     }
 
-    ApiResponse apiResponse = ApiResponse();
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .send(
+              request,
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-    try {
-      final response =
-          await _httpClient.send(request).timeout(timeout ?? _defaultTimeout);
-
-      // * Set the response
-      apiResponse = await uploadRespData(response);
-    } on TimeoutException {
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
-    } on SocketException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on http.ClientException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on HandshakeException {
-      apiResponse.message = ResponseMessage.handshakeError.value;
-      apiResponse.statusCode = ResponseMessage.handshakeError.code;
-    }
-
-    return apiResponse;
+        return await uploadRespData(response);
+      },
+    );
   }
 
   /// Executes client.send with a new [Client] instance and closes it after it has been used.
   /// This allows you to create custom logics e.g show upload progress.
   ///
   /// > * _@param: (required)_ __[BaseRequest]__
-  Future<StreamedResponse> send(BaseRequest request) =>
-      _httpClient.send(request);
+  FutureOr<StreamedResponse> send(BaseRequest request) async {
+    return TryCatcher.handleNonNull<StreamedResponse>(
+      () => _httpClient.send(request),
+    );
+  }
 }

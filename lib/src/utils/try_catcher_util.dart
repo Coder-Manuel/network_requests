@@ -2,7 +2,7 @@ part of 'utils.dart';
 
 final class TryCatcher {
   @pragma('vm:notify-debugger-on-exception')
-  static FutureOr<ApiResponse> handleResponse(
+  static FutureOr<ApiResponse> resolve(
     FutureOr<ApiResponse> Function() callback,
   ) {
     ApiResponse apiResponse = ApiResponse();
@@ -30,8 +30,20 @@ final class TryCatcher {
   }
 
   @pragma('vm:notify-debugger-on-exception')
-  static FutureOr<T?> handleAll<T>(
+  static FutureOr<T?> handle<T>(
     FutureOr<T?> Function() callback,
+  ) {
+    try {
+      return callback();
+    } catch (e) {
+      Logger.logError('ERROR: ${e.toString()}');
+      throw NetworkRequestException(e);
+    }
+  }
+
+  @pragma('vm:notify-debugger-on-exception')
+  static FutureOr<T> handleNonNull<T>(
+    FutureOr<T> Function() callback,
   ) {
     try {
       return callback();
