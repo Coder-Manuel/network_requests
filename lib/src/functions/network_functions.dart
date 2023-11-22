@@ -48,7 +48,7 @@ ResponseMessage extractMessage(int status) {
       message = ResponseMessage.internalServerError;
       break;
     case 502:
-      message = ResponseMessage.internalServerError;
+      message = ResponseMessage.badGateway;
       break;
     default:
       message = ResponseMessage.somethingWentWrong;

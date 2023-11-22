@@ -14,7 +14,7 @@ part of '../../network_requests.dart';
 ///
 /// >`message` [string] - The message of the status code returned
 ///
-class ApiResponse {
+final class ApiResponse {
   dynamic _data;
   Uint8List bytes = Uint8List.fromList([]);
 
@@ -39,16 +39,20 @@ class ApiResponse {
     }
   }
 
-  ///`
-  /// The Status-Code received from the RestAPI Request
-  ///`
+  ///
+  /// The Status-Code received from the RestAPI Request or error-code from the package.
+  ///
+  /// Below are the error-codes and their representations:
+  /// > - 8001 - General Error
+  /// > - 8005 - No Internet Error
+  ///
   int get statusCode => _status;
 
   ///`
   /// Set The Status-Code received from the RestAPI Request
   ///`
-  set statusCode(int value) {
-    if (true) _status = value;
+  set statusCode(int? value) {
+    if (value != null) _status = value;
   }
 
   ///`

@@ -1,7 +1,7 @@
 part of '../../network_requests.dart';
 
 /// [NetworkRequest] client.
-class NetworkRequest {
+final class NetworkRequest {
   static NetworkRequest? _instance;
 
   late InterceptedHttp _httpClient;
@@ -56,6 +56,8 @@ class NetworkRequest {
     _httpClient.interceptors.insert(0, value);
   }
 
+  final _defaultTimeout = const Duration(seconds: 45);
+
   /// Sends a GET request with the given headers to the given URL.
   /// > * _@param: (required)_ __[Uri]__
   ///
@@ -64,47 +66,32 @@ class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> get(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Duration? timeout,
   }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .get(
-            url,
-            headers: headers,
-          )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .get(
+              url,
+              headers: headers,
+              params: params,
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-    } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a POST request with the given headers and body to the given URL.
@@ -118,49 +105,34 @@ class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> post(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .post(
-            url,
-            headers: headers,
-            body: bodyParser(body),
-          )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .post(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-    } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a PUT request with the given headers and body to the given URL.
@@ -174,49 +146,75 @@ class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> put(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .put(
-            url,
-            headers: headers,
-            body: bodyParser(body),
-          )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .put(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-    } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
+        return respData(response);
+      },
+    );
+  }
 
-    return apiResponse;
+  /// Sends a PATCH request with the given headers and body to the given URL.
+  ///
+  /// > * _@param: (required)_ __[Uri]__
+  ///
+  /// > * _@param:_ __[Map<String, String>?]__ headers
+  ///
+  /// > * _@param:_ __[Object?]__ body
+  ///
+  /// > * _@param:_ __[Duration?]__ timeout
+  ///
+  /// Pass in a [timeout] if you want more customization, the default
+  /// set to 45 seconds
+  ///
+  /// If the `success` property is `false`, then that simply means the `request`
+  /// `failed`.
+  ///
+  /// This automatically initializes a new [Client] and closes that client once
+  /// the request is complete.
+  Future<ApiResponse> patch(
+    Uri url, {
+    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Object? body,
+    Duration? timeout,
+  }) async {
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .patch(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
+
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a DELETE request with the given headers to the given URL.
@@ -229,49 +227,34 @@ class NetworkRequest {
   /// > * _@param:_ __[Duration?]__ timeout
   ///
   /// Pass in a [timeout] if you want more customization, the default
-  /// set to 30 seconds
+  /// set to 45 seconds
   ///
   /// If the `success` property is `false`, then that simply means the `request`
-  /// `failed`, you can then view other details of the request but the `data`
-  /// value will be `null`.
+  /// `failed`.
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
   Future<ApiResponse> delete(
     Uri url, {
     Map<String, String>? headers,
+    Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
   }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .delete(
-            url,
-            headers: headers,
-            body: bodyParser(body),
-          )
-          .timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .post(
+              url,
+              headers: headers,
+              params: params,
+              body: bodyParser(body),
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-    } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
-
-    return apiResponse;
+        return respData(response);
+      },
+    );
   }
 
   /// Sends a [MultipartRequest] to upload [files] with the given [headers] to the provided [url].
@@ -315,43 +298,35 @@ class NetworkRequest {
     }
 
     // * Add headers.
-    request.headers.addAll(headers ?? {});
+    if (headers != null) {
+      request.headers.addAll(headers);
+    }
 
     // * Add any extra fields that might be passed.
     if (otherFields != null) {
       request.fields.addAll(otherFields);
     }
 
-    ApiResponse apiResponse = ApiResponse();
+    return TryCatcher.resolve(
+      () async {
+        final response = await _httpClient
+            .send(
+              request,
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-    try {
-      final response = await _httpClient.send(request).timeout(
-            timeout ?? const Duration(seconds: 30),
-          );
-
-      // * Set the response
-      apiResponse = await uploadRespData(response);
-    } on TimeoutException {
-      apiResponse.data = ResponseMessage.serverTimeout;
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-    } on SocketException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } on http.ClientException {
-      apiResponse.data = ResponseMessage.noInternet;
-      apiResponse.message = ResponseMessage.noInternet.value;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
-
-    return apiResponse;
+        return await uploadRespData(response);
+      },
+    );
   }
 
   /// Executes client.send with a new [Client] instance and closes it after it has been used.
   /// This allows you to create custom logics e.g show upload progress.
   ///
   /// > * _@param: (required)_ __[BaseRequest]__
-  Future<StreamedResponse> send(BaseRequest request) =>
-      _httpClient.send(request);
+  Future<StreamedResponse> send(BaseRequest request) async {
+    return TryCatcher.handleNonNull<StreamedResponse>(
+      () => _httpClient.send(request),
+    );
+  }
 }

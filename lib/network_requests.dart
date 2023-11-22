@@ -3,7 +3,6 @@
 library network_requests;
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 
 /// 3rd party libraries
@@ -27,7 +26,7 @@ export 'src/http_interceptor/http_interceptor.dart'
         Request,
         BaseResponse;
 export 'src/interceptors/network_request_interceptor.dart';
-export 'src/utils/utils.dart' hide Logger;
+export 'src/utils/utils.dart' hide Logger, TryCatcher;
 
 /// The models
 part 'src/models/response_model.dart';

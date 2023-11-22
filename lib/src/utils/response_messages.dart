@@ -26,8 +26,28 @@ extension Message on ResponseMessage {
         return 'We encountered an unexpected glitch.\nPlease try again later.';
       case ResponseMessage.badGateway:
         return 'Server is temporarily down.\nWe apologize for the inconvenience.';
+      case ResponseMessage.serverTimeout:
+        return 'Oops! It seems our server is taking longer than expected to respond. Please try again later.';
+      case ResponseMessage.handshakeError:
+        return 'We encountered an issue while securing your connection. Please try again later.';
       default:
         return null;
+    }
+  }
+
+  int? get code {
+    switch (this) {
+      case ResponseMessage.okay:
+      case ResponseMessage.created:
+        return 200;
+      case ResponseMessage.serverTimeout:
+        return 504;
+      case ResponseMessage.handshakeError:
+        return 522;
+      case ResponseMessage.noInternet:
+        return 8005;
+      default:
+        return 8001;
     }
   }
 }

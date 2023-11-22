@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import '../http_interceptor.dart';
 
-class ResponseData extends BaseResponse {
+final class ResponseData extends BaseResponse {
   @override
   int statusCode;
 

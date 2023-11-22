@@ -42,7 +42,7 @@ typedef TimeoutCallback = FutureOr<StreamedResponse> Function();
 ///
 /// Don't forget to close the client once you are done, as a client keeps
 /// the connection alive with the server by default.
-class InterceptedClient extends BaseClient {
+final class InterceptedClient extends BaseClient {
   /// List of interceptors that will be applied to the requests and responses.
   final List<InterceptorContract> interceptors;
 

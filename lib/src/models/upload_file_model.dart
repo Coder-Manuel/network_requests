@@ -1,7 +1,7 @@
 part of '../../network_requests.dart';
 
 /// The upload structure of files
-class UploadFile {
+final class UploadFile {
   /// The field name/key that will be used to append the file while uploading.
   final String field;
 
