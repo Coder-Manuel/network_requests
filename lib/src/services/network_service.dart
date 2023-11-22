@@ -79,34 +79,19 @@ final class NetworkRequest {
     Map<String, dynamic>? params,
     Duration? timeout,
   }) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      final response = await _httpClient
-          .get(
-            url,
-            headers: headers,
-            params: params,
-          )
-          .timeout(timeout ?? _defaultTimeout);
+    final apiResponse = await TryCatcher.handleResponse(
+      () async {
+        final response = await _httpClient
+            .get(
+              url,
+              headers: headers,
+              params: params,
+            )
+            .timeout(timeout ?? _defaultTimeout);
 
-      // * Set the response
-      apiResponse = respData(response);
-    } on TimeoutException {
-      apiResponse.message = ResponseMessage.serverTimeout.value;
-      apiResponse.statusCode = ResponseMessage.serverTimeout.code;
-    } on SocketException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on http.ClientException {
-      apiResponse.message = ResponseMessage.noInternet.value;
-      apiResponse.statusCode = ResponseMessage.noInternet.code;
-    } on HandshakeException {
-      apiResponse.message = ResponseMessage.handshakeError.value;
-      apiResponse.statusCode = ResponseMessage.handshakeError.code;
-    } catch (e) {
-      Logger.logError('ERROR: ${e.toString()}');
-      throw NetworkRequestException(e);
-    }
+        return respData(response);
+      },
+    );
 
     return apiResponse;
   }
