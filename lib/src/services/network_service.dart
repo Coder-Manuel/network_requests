@@ -73,12 +73,12 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  FutureOr<ApiResponse> get(
+  Future<ApiResponse> get(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Duration? timeout,
-  }) {
+  }) async {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
@@ -112,13 +112,13 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  FutureOr<ApiResponse> post(
+  Future<ApiResponse> post(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) {
+  }) async {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
@@ -153,13 +153,13 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  FutureOr<ApiResponse> put(
+  Future<ApiResponse> put(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) {
+  }) async {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
@@ -194,13 +194,13 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  FutureOr<ApiResponse> patch(
+  Future<ApiResponse> patch(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) {
+  }) async {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
@@ -234,13 +234,13 @@ final class NetworkRequest {
   ///
   /// This automatically initializes a new [Client] and closes that client once
   /// the request is complete.
-  FutureOr<ApiResponse> delete(
+  Future<ApiResponse> delete(
     Uri url, {
     Map<String, String>? headers,
     Map<String, dynamic>? params,
     Object? body,
     Duration? timeout,
-  }) {
+  }) async {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
@@ -272,7 +272,7 @@ final class NetworkRequest {
   /// > * _@param:_ __[List<UploadFile>]__ files
   ///
 
-  FutureOr<ApiResponse> uploadFile(
+  Future<ApiResponse> uploadFile(
     Uri url, {
     required String method,
     required List<UploadFile> files,
@@ -324,7 +324,7 @@ final class NetworkRequest {
   /// This allows you to create custom logics e.g show upload progress.
   ///
   /// > * _@param: (required)_ __[BaseRequest]__
-  FutureOr<StreamedResponse> send(BaseRequest request) async {
+  Future<StreamedResponse> send(BaseRequest request) async {
     return TryCatcher.handleNonNull<StreamedResponse>(
       () => _httpClient.send(request),
     );
