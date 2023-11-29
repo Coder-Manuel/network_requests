@@ -4,11 +4,11 @@ final class TryCatcher {
   @pragma('vm:notify-debugger-on-exception')
   static FutureOr<ApiResponse> resolve(
     FutureOr<ApiResponse> Function() callback,
-  ) {
+  ) async {
     ApiResponse apiResponse = ApiResponse();
 
     try {
-      return callback();
+      return await callback();
     } on TimeoutException {
       apiResponse.message = ResponseMessage.serverTimeout.value;
       apiResponse.statusCode = ResponseMessage.serverTimeout.code;
@@ -32,9 +32,9 @@ final class TryCatcher {
   @pragma('vm:notify-debugger-on-exception')
   static FutureOr<T?> handle<T>(
     FutureOr<T?> Function() callback,
-  ) {
+  ) async {
     try {
-      return callback();
+      return await callback();
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
@@ -44,9 +44,9 @@ final class TryCatcher {
   @pragma('vm:notify-debugger-on-exception')
   static FutureOr<T> handleNonNull<T>(
     FutureOr<T> Function() callback,
-  ) {
+  ) async {
     try {
-      return callback();
+      return await callback();
     } catch (e) {
       Logger.logError('ERROR: ${e.toString()}');
       throw NetworkRequestException(e);
