@@ -244,7 +244,7 @@ final class NetworkRequest {
     return TryCatcher.resolve(
       () async {
         final response = await _httpClient
-            .post(
+            .delete(
               url,
               headers: headers,
               params: params,
