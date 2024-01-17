@@ -119,20 +119,20 @@ final class NetworkRequest {
     Object? body,
     Duration? timeout,
   }) async {
-    return TryCatcher.resolve(
-      () async {
-        final response = await _httpClient
-            .post(
-              url,
-              headers: headers,
-              params: params,
-              body: bodyParser(body),
-            )
-            .timeout(timeout ?? _defaultTimeout);
+    // return TryCatcher.resolve(
+    //   () async {
+    final response = await _httpClient
+        .post(
+          url,
+          headers: headers,
+          params: params,
+          body: bodyParser(body),
+        )
+        .timeout(timeout ?? _defaultTimeout);
 
-        return respData(response);
-      },
-    );
+    return respData(response);
+    //   },
+    // );
   }
 
   /// Sends a PUT request with the given headers and body to the given URL.
